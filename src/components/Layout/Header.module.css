@@ -4,6 +4,7 @@
   height: 3rem;
   margin-top: 0%;
   display: flex;
+  cursor: pointer;
   padding-left: 2rem;
   justify-content: space-evenly;
   padding-inline-start: 2rem;
