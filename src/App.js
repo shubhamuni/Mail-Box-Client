@@ -1,12 +1,14 @@
 import "./App.css";
-import { Fragment } from "react";
-import Header from "./components/Layout/Header";
+import Homepage from "./components/Layout/Homepage";
+import { Layout } from "./components/Layout/Layout";
 
 function App() {
   return (
-    <Fragment>
-      <Header />
-    </Fragment>
+    <Layout>
+      <main>
+        <Swit
+      </main>
+    </Layout>
   );
 }
 
