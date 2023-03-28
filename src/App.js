@@ -3,6 +3,7 @@ import "./App.css";
 import AuthForm from "./components/Authentication/AuthForm";
 import Homepage from "./components/Layout/Homepage";
 import Mails from "./components/Mail/Mails";
+import ComposeEmail from "./components/Mail/ComposeEmail";
 import { Layout } from "./components/Layout/Layout";
 import { useSelector } from "react-redux";
 
@@ -20,6 +21,10 @@ function App() {
           </Route>
           <Route path="/mails">
             {isToken && <Mails />}
+            {!isToken && <AuthForm />}
+          </Route>
+          <Route path="/mails/compose">
+            {isToken && <ComposeEmail />}
             {!isToken && <AuthForm />}
           </Route>
         </Switch>
