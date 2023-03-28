@@ -8,7 +8,7 @@ function StripedRowExample() {
   return (
     <Fragment>
       <Button variant="dark">
-        <Link to="/mails/compose">Compose Email</Link>
+        <Link to="/compose">Compose Email</Link>
       </Button>
       <div style={{ margin: "15rem" }}>
         <h2 style={{ textAlign: "center", paddingBottom: "5rem" }}>Inbox</h2>

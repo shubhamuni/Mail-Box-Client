@@ -23,7 +23,7 @@ function App() {
             {isToken && <Mails />}
             {!isToken && <AuthForm />}
           </Route>
-          <Route path="/mails/compose">
+          <Route path="/compose">
             {isToken && <ComposeEmail />}
             {!isToken && <AuthForm />}
           </Route>
