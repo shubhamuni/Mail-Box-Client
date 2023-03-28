@@ -40,10 +40,10 @@ const AuthForm = (props) => {
     let url;
     if (isLogin) {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAZ58t-_MvVDQ3e_pDLaFu4YWhyu7Ix4Xc";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBTRcoSUSAZmbscuDU2SdFf7KsMyD4oxvM";
     } else {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAZ58t-_MvVDQ3e_pDLaFu4YWhyu7Ix4Xc";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBTRcoSUSAZmbscuDU2SdFf7KsMyD4oxvM";
     }
     fetch(url, {
       method: "POST",
