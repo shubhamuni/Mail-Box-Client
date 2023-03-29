@@ -13,6 +13,7 @@ const InboxList = (props) => {
             messege={email.messege}
             subject={email.subject}
             deleteHandler={() => props.deleteHandler(email.id)}
+            showEmail={() => props.showEmail(email.id)}
           />
         ))}
       </ListGroup.Item>

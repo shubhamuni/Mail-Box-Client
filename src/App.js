@@ -6,6 +6,7 @@ import ComposeEmail from "./components/Mail/ComposeEmail";
 import { Layout } from "./components/Layout/Layout";
 import { useSelector } from "react-redux";
 import DisplayMails from "./components/Mail/DisplayMails";
+import MailDetails from "./components/Mail/MailDetails";
 
 function App() {
   const isToken = useSelector((state) => state.token.token);
@@ -25,6 +26,10 @@ function App() {
           </Route>
           <Route path="/compose">
             {isToken && <ComposeEmail />}
+            {!isToken && <AuthForm />}
+          </Route>
+          <Route path="/details">
+            {isToken && <MailDetails />}
             {!isToken && <AuthForm />}
           </Route>
         </Switch>

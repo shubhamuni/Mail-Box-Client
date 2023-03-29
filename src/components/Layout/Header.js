@@ -30,6 +30,14 @@ const Header = () => {
               Mails
             </Link>
           </li>
+          <li>
+            <Link
+              style={{ textDecoration: "none", color: "black" }}
+              to="/mails"
+            >
+              Sent Mails
+            </Link>
+          </li>
           {isToken && (
             <li onClick={logoutHandler} style={{ paddingInlineStart: "30rem" }}>
               Logout

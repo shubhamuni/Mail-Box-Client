@@ -40,6 +40,7 @@ const DisplayMails = () => {
   }, []);
 
   const deleteHandler = (keyToDelete) => {
+    setLoading(true);
     // const keyToDelete = props.id;
     console.log("keyToDelete", keyToDelete);
 
@@ -57,11 +58,11 @@ const DisplayMails = () => {
       .catch((error) => {
         console.error(`There was a problem deleting the node: ${error}`);
       });
+    setLoading(false);
   };
   const showEmail = (emailId) => {
     const selected = data.find((email) => email.id === emailId);
     setSelectedEmail(selected);
-    console.log("selected", selected);
   };
   let content = <p>Found no Email.</p>;
 
@@ -81,11 +82,23 @@ const DisplayMails = () => {
   }
   if (selectedEmail) {
     content = (
-      <Table striped border hover style={{ marginInline: "10rem" }}>
-        <thead>From: {selectedEmail.se nder}</div>
-        <span>Subject: {selectedEmail.subject}</span>
-        <div>Messege:{selectedEmail.message}</div>
-      </Table>
+      <div style={{ marginInline: "10rem", marginTop: "20rem" }}>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>{`From : ${selectedEmail.sender}`}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{`Subject : ${selectedEmail.subject}`}</td>
+            </tr>
+            <tr>
+              <td>{`Messege : ${selectedEmail.messege}`}</td>
+            </tr>
+          </tbody>
+        </Table>
+      </div>
     );
   }
 
@@ -94,14 +107,21 @@ const DisplayMails = () => {
   }
   return (
     <Fragment>
-      <Button variant="dark">
-        <Link to="/compose" style={{ textDecoration: "none", color: "white" }}>
-          Compose Email
-        </Link>
-      </Button>
-      <h2 style={{ textAlign: "center", paddingBottom: "5rem" }}>
-        Inbox ({data.length})
-      </h2>
+      {!selectedEmail && (
+        <Button variant="dark">
+          <Link
+            to="/compose"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Compose Email
+          </Link>
+        </Button>
+      )}
+      {!selectedEmail && (
+        <h2 style={{ textAlign: "center", paddingBottom: "5rem" }}>
+          Inbox ({data.length})
+        </h2>
+      )}
       {content}
     </Fragment>
   );
