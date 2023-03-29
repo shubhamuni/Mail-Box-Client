@@ -11,7 +11,8 @@ const ComposeEmail = () => {
   const databaseURL =
     "https://mail-box-client-4d083-default-rtdb.firebaseio.com/";
 
-  const sendMessegeHandler = async () => {
+  const sendMessegeHandler = async (event) => {
+    event.preventDefault();
     let email = emailInputRef.current.value;
     email = email.replace(/[^a-zA-Z0-9]/g, "");
     const mail = {

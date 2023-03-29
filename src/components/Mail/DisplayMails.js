@@ -80,6 +80,9 @@ const DisplayMails = () => {
           Compose Email
         </Link>
       </Button>
+      <h2 style={{ textAlign: "center", paddingBottom: "5rem" }}>
+        Inbox ({data.length})
+      </h2>
       {content}
     </Fragment>
   );

@@ -1,23 +1,25 @@
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import { Link } from "react-router-dom";
 
 const Mails = (props) => {
-  let number = 1;
   return (
-    <div style={{ margin: "15rem" }}>
-      <h2 style={{ textAlign: "center", paddingBottom: "5rem" }}>Inbox</h2>
+    <div style={{ marginInline: "15rem" }}>
       <Table striped>
         <thead></thead>
         <tbody>
-          <tr>
-            <td>{props.sender && number++}</td>
-            <td style={{ fontWeight: "bold" }}>{props.sender}</td>
-            <td>
-              <Button variant="dark" onClick={props.deleteHandler}>
-                Delete
-              </Button>
-            </td>
-          </tr>
+          <Link to="/details">
+            <tr>
+              <td style={{ fontWeight: "bold" }}>{props.sender}</td>
+              {props.sender && (
+                <td>
+                  <Button variant="dark" onClick={props.deleteHandler}>
+                    Delete
+                  </Button>
+                </td>
+              )}
+            </tr>
+          </Link>
         </tbody>
       </Table>
     </div>
