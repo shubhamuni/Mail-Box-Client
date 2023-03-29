@@ -38,6 +38,25 @@ const DisplayMails = () => {
     fetchEmailHandler();
   }, []);
 
+  const deleteHandler = (keyToDelete) => {
+    // const keyToDelete = props.id;
+    console.log("keyToDelete", keyToDelete);
+
+    fetch(`${databaseURL}/${email}/${keyToDelete}.json`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        console.log(response);
+        fetchEmailHandler();
+        console.log(`Node with key ${keyToDelete} deleted successfully.`);
+      })
+      .catch((error) => {
+        console.error(`There was a problem deleting the node: ${error}`);
+      });
+  };
   let content = <p>Found no Email.</p>;
 
   if (loading) {
@@ -46,7 +65,7 @@ const DisplayMails = () => {
   if (data.length > 0) {
     content = (
       <div>
-        <InboxList emails={data} />
+        <InboxList emails={data} deleteHandler={(id) => deleteHandler(id)} />
       </div>
     );
   }

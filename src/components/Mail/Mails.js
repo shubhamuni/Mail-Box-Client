@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 const Mails = (props) => {
@@ -11,6 +12,11 @@ const Mails = (props) => {
           <tr>
             <td>{props.sender && number++}</td>
             <td style={{ fontWeight: "bold" }}>{props.sender}</td>
+            <td>
+              <Button variant="dark" onClick={props.deleteHandler}>
+                Delete
+              </Button>
+            </td>
           </tr>
         </tbody>
       </Table>

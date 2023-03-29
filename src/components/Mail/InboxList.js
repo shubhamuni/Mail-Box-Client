@@ -10,8 +10,9 @@ const InboxList = (props) => {
             key={email.id}
             id={email.id}
             sender={email.sender}
-            subject={email.subject}
             messege={email.messege}
+            subject={email.subject}
+            deleteHandler={() => props.deleteHandler(email.id)}
           />
         ))}
       </ListGroup.Item>
