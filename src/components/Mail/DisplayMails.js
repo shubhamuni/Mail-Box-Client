@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import InboxList from "./InboxList";
 
@@ -7,6 +7,7 @@ const DisplayMails = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedEmail, setSelectedEmail] = useState(null);
   const databaseURL =
     "https://mail-box-client-4d083-default-rtdb.firebaseio.com/";
   let email = localStorage.getItem("email");
@@ -57,6 +58,11 @@ const DisplayMails = () => {
         console.error(`There was a problem deleting the node: ${error}`);
       });
   };
+  const showEmail = (emailId) => {
+    const selected = data.find((email) => email.id === emailId);
+    setSelectedEmail(selected);
+    console.log("selected", selected);
+  };
   let content = <p>Found no Email.</p>;
 
   if (loading) {
@@ -65,8 +71,21 @@ const DisplayMails = () => {
   if (data.length > 0) {
     content = (
       <div>
-        <InboxList emails={data} deleteHandler={(id) => deleteHandler(id)} />
+        <InboxList
+          emails={data}
+          deleteHandler={(id) => deleteHandler(id)}
+          showEmail={(id) => showEmail(id)}
+        />
       </div>
+    );
+  }
+  if (selectedEmail) {
+    content = (
+      <Table striped border hover style={{ marginInline: "10rem" }}>
+        <thead>From: {selectedEmail.se nder}</div>
+        <span>Subject: {selectedEmail.subject}</span>
+        <div>Messege:{selectedEmail.message}</div>
+      </Table>
     );
   }
 
