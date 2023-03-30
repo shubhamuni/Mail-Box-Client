@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import InboxList from "./InboxList";
+import SentList from "./SentList";
 
-const DisplayMails = () => {
+const SentMails = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -15,7 +15,7 @@ const DisplayMails = () => {
   const fetchEmailHandler = async () => {
     setError(null);
     try {
-      const response = await fetch(`${databaseURL}/${email}/inbox.json`);
+      const response = await fetch(`${databaseURL}/${email}/sent.json`);
 
       const data = await response.json();
 
@@ -23,10 +23,10 @@ const DisplayMails = () => {
 
       for (const key in data) {
         loadedData.push({
-          id: key,
-          sender: data[key].sender,
-          subject: data[key].subject,
-          messege: data[key].messege,
+          toId: key,
+          toSend: data[key].toSend,
+          toSubject: data[key].toSubject,
+          toMessege: data[key].toMessege,
         });
       }
       setData(loadedData);
@@ -44,7 +44,7 @@ const DisplayMails = () => {
     // const keyToDelete = props.id;
     console.log("keyToDelete", keyToDelete);
 
-    fetch(`${databaseURL}/${email}/inbox/${keyToDelete}.json`, {
+    fetch(`${databaseURL}/${email}/sent/${keyToDelete}.json`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -60,8 +60,8 @@ const DisplayMails = () => {
       });
     setLoading(false);
   };
-  const showEmail = (emailId) => {
-    const selected = data.find((email) => email.id === emailId);
+  const showSentEmail = (emailId) => {
+    const selected = data.find((email) => email.toId === emailId);
     setSelectedEmail(selected);
   };
   let content = <p>Found no Email.</p>;
@@ -72,10 +72,10 @@ const DisplayMails = () => {
   if (data.length > 0) {
     content = (
       <div>
-        <InboxList
-          emails={data}
+        <SentList
+          sentMail={data}
           deleteHandler={(id) => deleteHandler(id)}
-          showEmail={(id) => showEmail(id)}
+          showEmail={(id) => showSentEmail(id)}
         />
       </div>
     );
@@ -86,15 +86,15 @@ const DisplayMails = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>{`From : ${selectedEmail.sender}`}</th>
+              <th>{`From : ${selectedEmail.toSend}`}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{`Subject : ${selectedEmail.subject}`}</td>
+              <td>{`Subject : ${selectedEmail.toSubject}`}</td>
             </tr>
             <tr>
-              <td>{`Messege : ${selectedEmail.messege}`}</td>
+              <td>{`Messege : ${selectedEmail.toMessege}`}</td>
             </tr>
           </tbody>
         </Table>
@@ -119,7 +119,7 @@ const DisplayMails = () => {
       )}
       {!selectedEmail && (
         <h2 style={{ textAlign: "center", paddingBottom: "5rem" }}>
-          Inbox ({data.length})
+          Sent ({data.length})
         </h2>
       )}
       {content}
@@ -127,4 +127,4 @@ const DisplayMails = () => {
   );
 };
 
-export default DisplayMails;
+export default SentMails;

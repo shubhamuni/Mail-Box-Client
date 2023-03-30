@@ -11,6 +11,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(loginAction.removeToken(null));
+    localStorage.removeItem("email");
     dispatch(authAction.logout());
   };
   return (
@@ -31,10 +32,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link
-              style={{ textDecoration: "none", color: "black" }}
-              to="/mails"
-            >
+            <Link style={{ textDecoration: "none", color: "black" }} to="/sent">
               Sent Mails
             </Link>
           </li>

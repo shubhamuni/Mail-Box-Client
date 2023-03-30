@@ -6,7 +6,7 @@ const ComposeEmail = () => {
   const subjectInputRef = useRef();
   const messageInputRef = useRef();
 
-  const senderEmail = localStorage.getItem("email");
+  let senderEmail = localStorage.getItem("email");
 
   const databaseURL =
     "https://mail-box-client-4d083-default-rtdb.firebaseio.com/";
@@ -15,13 +15,14 @@ const ComposeEmail = () => {
     event.preventDefault();
     let email = emailInputRef.current.value;
     email = email.replace(/[^a-zA-Z0-9]/g, "");
-    const mail = {
+    let mail = {
       sender: senderEmail,
       subject: subjectInputRef.current.value,
       messege: messageInputRef.current.value,
     };
 
-    const response = await fetch(`${databaseURL}/${email}.json`, {
+    senderEmail = senderEmail.replace(/[^a-zA-Z0-9]/g, "");
+    const response = await fetch(`${databaseURL}/${email}/inbox.json`, {
       method: "POST",
       body: JSON.stringify(mail),
       headers: {
@@ -30,8 +31,21 @@ const ComposeEmail = () => {
     });
     const data = await response.json();
     console.log(data);
+    const tmail = {
+      toSend: emailInputRef.current.value,
+      toSubject: subjectInputRef.current.value,
+      toMessege: messageInputRef.current.value,
+    };
+    const res = await fetch(`${databaseURL}/${senderEmail}/sent.json`, {
+      method: "POST",
+      body: JSON.stringify(tmail),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const ata = await res.json();
+    console.log(ata);
   };
-
   return (
     <Fragment>
       <Form
