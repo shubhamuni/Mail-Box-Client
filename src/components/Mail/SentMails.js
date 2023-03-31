@@ -122,7 +122,7 @@ const SentMails = () => {
       )}
       {!selectedEmail && (
         <h2 style={{ textAlign: "center", paddingBottom: "5rem" }}>
-          Sent ({data.length})
+          Sent Mails ({data.length})
         </h2>
       )}
       {content}
