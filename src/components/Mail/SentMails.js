@@ -13,6 +13,7 @@ const SentMails = () => {
   let email = localStorage.getItem("email");
   email = email.replace(/[^a-zA-Z0-9]/g, "");
   const fetchEmailHandler = async () => {
+    setLoading(true);
     setError(null);
     try {
       const response = await fetch(`${databaseURL}/${email}/sent.json`);
@@ -36,7 +37,9 @@ const SentMails = () => {
     setLoading(false);
   };
   useEffect(() => {
-    fetchEmailHandler();
+    setInterval(() => {
+      fetchEmailHandler();
+    }, 5000);
   }, []);
 
   const deleteHandler = (keyToDelete) => {

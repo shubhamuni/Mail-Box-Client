@@ -24,17 +24,24 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link
-              style={{ textDecoration: "none", color: "black" }}
-              to="/mails"
-            >
-              Mails
-            </Link>
+            {isToken && (
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                to="/mails"
+              >
+                Mails
+              </Link>
+            )}
           </li>
           <li>
-            <Link style={{ textDecoration: "none", color: "black" }} to="/sent">
-              Sent Mails
-            </Link>
+            {isToken && (
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                to="/sent"
+              >
+                Sent Mails
+              </Link>
+            )}
           </li>
           {isToken && (
             <li onClick={logoutHandler} style={{ paddingInlineStart: "30rem" }}>

@@ -14,6 +14,8 @@ const loginSlice = createSlice({
     removeToken: (state, action) => {
       state.token = action.payload;
       localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      localStorage.removeItem("name");
     },
   },
 });

@@ -20,7 +20,8 @@ const AuthForm = (props) => {
       dispatch(loginAction.removeToken(null));
       dispatch(authAction.logout());
       localStorage.removeItem("name");
-    }, 1000 * 60 * 15);
+      localStorage.removeItem("email");
+    }, 1000 * 60 * 10);
   };
 
   const switchAuthModeHandler = () => {
